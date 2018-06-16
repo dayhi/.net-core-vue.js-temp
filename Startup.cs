@@ -32,8 +32,12 @@ namespace vueTest {
             //默认文件静态文件缓存机制
             app.UseStaticFiles (new StaticFileOptions {
                 OnPrepareResponse = ctx => {
-                    const int durationInSeconds = 60 * 60 * 24;//缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
+                    const int durationInSeconds = 60 * 60 * 24; //缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
                     ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
+
+                    //取消etag和lastModified--烂办法，先解决问题
+                    ctx.Context.Response.Headers.Remove (HeaderNames.ETag);
+                    ctx.Context.Response.Headers.Remove (HeaderNames.LastModified);
                 }
             });
 
