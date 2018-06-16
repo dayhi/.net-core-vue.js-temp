@@ -7,7 +7,8 @@
     <base href="~/" />
     
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/dist/main.css" />
+    <!-- asp-append-version="true" 为静态文件加sha256哈希值，来自tag hepers() -->
+    <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true"/> 
 </head>
 <body>
     @RenderBody()
@@ -16,8 +17,8 @@
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="~/dist/vendor.js" ></script>
-    <script src="~/dist/vendors~main.js" ></script>
+    <script src="~/dist/vendor.js" asp-append-version="true"></script>
+    <script src="~/dist/vendors~main.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

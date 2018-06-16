@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers;//用来设置webpack生成的静态文件缓存
+using Microsoft.Net.Http.Headers; //用来设置webpack生成的静态文件缓存
 
 namespace vueTest {
     public class Startup {
@@ -30,7 +30,12 @@ namespace vueTest {
             app.UseResponseCompression ();
 
             //默认文件静态文件缓存机制
-            app.UseStaticFiles ();
+            app.UseStaticFiles (new StaticFileOptions {
+                OnPrepareResponse = ctx => {
+                    const int durationInSeconds = 60 * 60 * 24;//缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
+                }
+            });
 
             if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
