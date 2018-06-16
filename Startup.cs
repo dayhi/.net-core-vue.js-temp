@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;//用来设置webpack生成的静态文件缓存
 
 namespace vueTest {
     public class Startup {
@@ -27,7 +28,7 @@ namespace vueTest {
 
             //添加gzip压缩
             app.UseResponseCompression ();
-            
+
             //默认文件静态文件缓存机制
             app.UseStaticFiles ();
 
