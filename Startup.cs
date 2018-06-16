@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,13 +16,19 @@ namespace vueTest {
         public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
-
+        
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
-            services.AddMvc ();
-            services.AddResponseCompression ();
+            // services.AddResponseCompression ();
+            services.Configure<CookiePolicyOptions> (options => {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = 0;
+            });
+            
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,10 +37,12 @@ namespace vueTest {
             //添加gzip压缩
             app.UseResponseCompression ();
 
-            //默认文件静态文件缓存机制
+            app.UseHttpsRedirection ();
+
+            //静态文件缓存机制
             app.UseStaticFiles (new StaticFileOptions {
                 OnPrepareResponse = ctx => {
-                    const int durationInSeconds = 60 * 60 * 24; //缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
+                    const int durationInSeconds = 60 * 60 * 24; // TODO:缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
                     ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
 
                     //取消etag和lastModified--烂办法，先解决问题
@@ -41,6 +51,8 @@ namespace vueTest {
                 }
             });
 
+            app.UseCookiePolicy ();
+
             if (env.IsDevelopment ()) {
                 app.UseDeveloperExceptionPage ();
                 app.UseWebpackDevMiddleware (new WebpackDevMiddlewareOptions {
@@ -48,6 +60,7 @@ namespace vueTest {
                 });
             } else {
                 app.UseExceptionHandler ("/Home/Error");
+                app.UseHsts ();
             }
 
             app.UseMvc (routes => {
