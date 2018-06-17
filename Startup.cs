@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers; //用来设置webpack生成的静态文件缓存
 
 namespace vueTest {
     public class Startup {
         public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
-        
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,10 +25,14 @@ namespace vueTest {
             services.Configure<CookiePolicyOptions> (options => {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = 0;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
+
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
+
+            services.AddResponseCompression (options => {
+                options.EnableForHttps = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,11 +47,11 @@ namespace vueTest {
             app.UseStaticFiles (new StaticFileOptions {
                 OnPrepareResponse = ctx => {
                     const int durationInSeconds = 60 * 60 * 24; // TODO:缓存时间,在此期间此文件名会自动使用缓存(如果存在asp-append-version="true"则为文件名+sha256不发生改变，则使用缓存)
-                    ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
+                    ctx.Context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.CacheControl] = "public,max-age=" + durationInSeconds;
 
                     //取消etag和lastModified--烂办法，先解决问题
-                    ctx.Context.Response.Headers.Remove (HeaderNames.ETag);
-                    ctx.Context.Response.Headers.Remove (HeaderNames.LastModified);
+                    ctx.Context.Response.Headers.Remove (Microsoft.Net.Http.Headers.HeaderNames.ETag);
+                    ctx.Context.Response.Headers.Remove (Microsoft.Net.Http.Headers.HeaderNames.LastModified);
                 }
             });
 

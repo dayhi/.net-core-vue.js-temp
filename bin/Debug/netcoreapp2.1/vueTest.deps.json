@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "99fe681ef12496f96d6feb4682ccb5e312cf03db"
+    "signature": "5ff922365c8df9dfa9c8132c670a78a200992c52"
   },
   "compilationOptions": {
     "defines": [
@@ -24,11 +24,13 @@
     ".NETCoreApp,Version=v2.1": {
       "vueTest/1.0.0": {
         "dependencies": {
-          "Dapper": "1.50.5",
           "Microsoft.AspNetCore.App": "2.1.0",
           "Microsoft.AspNetCore.ResponseCompression": "2.1.0",
+          "Microsoft.EntityFrameworkCore": "2.1.0",
+          "Microsoft.EntityFrameworkCore.Design": "2.1.0",
           "Microsoft.NETCore.App": "2.1.0",
-          "MySql.Data": "8.0.11",
+          "MySql.Data.EntityFrameworkCore": "8.0.11",
+          "MySql.Data.EntityFrameworkCore.Design": "8.0.11",
           "ServiceStack.OrmLite.MySql.Core": "5.1.0"
         },
         "runtime": {
@@ -36,22 +38,6 @@
         },
         "compile": {
           "vueTest.dll": {}
-        }
-      },
-      "Dapper/1.50.5": {
-        "dependencies": {
-          "System.Data.SqlClient": "4.5.0",
-          "System.Reflection.Emit.Lightweight": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Dapper.dll": {
-            "assemblyVersion": "1.50.5.0",
-            "fileVersion": "1.50.5.0"
-          }
-        },
-        "compile": {
-          "lib/netstandard2.0/Dapper.dll": {}
         }
       },
       "Google.Protobuf/3.5.1": {
@@ -66,6 +52,21 @@
         },
         "compile": {
           "lib/netstandard1.0/Google.Protobuf.dll": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Relational.Design/1.1.4": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "2.1.0",
+          "NETStandard.Library": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {
+            "assemblyVersion": "1.1.4.0",
+            "fileVersion": "1.1.4.31109"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.1.0": {
@@ -258,6 +259,38 @@
           "lib/netcoreapp2.0/MySql.Data.dll": {}
         }
       },
+      "MySql.Data.EntityFrameworkCore/8.0.11": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "2.1.0",
+          "MySql.Data": "8.0.11"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {
+            "assemblyVersion": "8.0.11.0",
+            "fileVersion": "8.0.11.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
+        }
+      },
+      "MySql.Data.EntityFrameworkCore.Design/8.0.11": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational.Design": "1.1.4",
+          "MySql.Data": "8.0.11",
+          "MySql.Data.EntityFrameworkCore": "8.0.11",
+          "NETStandard.Library": "2.0.3"
+        },
+        "runtime": {
+          "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.Design.dll": {
+            "assemblyVersion": "8.0.11.0",
+            "fileVersion": "8.0.11.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.Design.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0"
@@ -273,7 +306,7 @@
           "System.Dynamic.Runtime": "4.3.0",
           "System.Net.NetworkInformation": "4.3.0",
           "System.Net.Primitives": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Runtime.Serialization.Primitives": "4.3.0"
         },
         "runtime": {
@@ -311,7 +344,7 @@
           "System.Dynamic.Runtime": "4.3.0",
           "System.Reflection.Emit": "4.3.0",
           "System.Reflection.Emit.Lightweight": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         },
         "runtime": {
@@ -444,7 +477,6 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
-      "System.Reflection.TypeExtensions/4.4.0": {},
       "System.Security.Cryptography.ProtectedData/4.4.0": {
         "runtime": {
           "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
@@ -1771,7 +1803,7 @@
           "System.Collections": "4.3.0",
           "System.IO": "4.3.0",
           "System.IO.FileSystem": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
           "System.Runtime.InteropServices": "4.3.0",
           "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
@@ -2656,7 +2688,7 @@
           "System.Reflection.Emit": "4.3.0",
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
@@ -2791,7 +2823,7 @@
           "System.Reflection.Emit.Lightweight": "4.3.0",
           "System.Reflection.Extensions": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
@@ -2887,7 +2919,7 @@
           "System.Reflection.Emit.Lightweight": "4.3.0",
           "System.Reflection.Extensions": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
@@ -2957,6 +2989,13 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.1.0",
           "Microsoft.NETCore.Targets": "2.1.0",
+          "System.Runtime": "4.3.0"
+        },
+        "compileOnly": true
+      },
+      "System.Reflection.TypeExtensions/4.3.0": {
+        "dependencies": {
+          "System.Reflection": "4.3.0",
           "System.Runtime": "4.3.0"
         },
         "compileOnly": true
@@ -3385,7 +3424,7 @@
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Extensions": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Runtime": "4.3.0",
           "System.Runtime.Extensions": "4.3.0",
@@ -3432,19 +3471,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Dapper/1.50.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
-      "path": "dapper/1.50.5",
-      "hashPath": "dapper.1.50.5.nupkg.sha512"
-    },
     "Google.Protobuf/3.5.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-f2k1VNaB9bfvEsvARzzEL1TZiIpL33KKK3JMH7UANlPlJVptuvsk4qpBZEnz0pORWZOdUHlVwMQuUzFqjJYCxA==",
       "path": "google.protobuf/3.5.1",
       "hashPath": "google.protobuf.3.5.1.nupkg.sha512"
+    },
+    "Microsoft.EntityFrameworkCore.Relational.Design/1.1.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mYfwte6F3/+U8+HHwz1Ijjwm1aXQtNzIIShAer7U+svjXLRst32tBh4lbVWVT8nm+jJyla78vJ96CJYC16pVzA==",
+      "path": "microsoft.entityframeworkcore.relational.design/1.1.4",
+      "hashPath": "microsoft.entityframeworkcore.relational.design.1.1.4.nupkg.sha512"
     },
     "Microsoft.NETCore.App/2.1.0": {
       "type": "package",
@@ -3501,6 +3540,20 @@
       "sha512": "sha512-P5zKcnM2SVtdHD6gfReymJguIYLhNL5Og8Qm5TC9MEsSupsAYrRu4AB4nsbalrjqqv8VHBqVREWsXg9lY+q03A==",
       "path": "mysql.data/8.0.11",
       "hashPath": "mysql.data.8.0.11.nupkg.sha512"
+    },
+    "MySql.Data.EntityFrameworkCore/8.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5YHuc4dli0/D8glw9M+IXZpeEBpnybYLkz6JNxzsVFGJKfuhWlOwa4E7SWQs0lhmyheVGEpx02BgGYVBFaXs2A==",
+      "path": "mysql.data.entityframeworkcore/8.0.11",
+      "hashPath": "mysql.data.entityframeworkcore.8.0.11.nupkg.sha512"
+    },
+    "MySql.Data.EntityFrameworkCore.Design/8.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D1wyNI1gPtXgQ7YW1p8u9CfevS1atpADfpapKqjCyvJwu+fKg5pFHWxoMycm7BVTZGHxG6mJ65cJ5J2V27butQ==",
+      "path": "mysql.data.entityframeworkcore.design/8.0.11",
+      "hashPath": "mysql.data.entityframeworkcore.design.8.0.11.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",
@@ -3585,13 +3638,6 @@
       "sha512": "sha512-m6icV6TqQOAdgt5N/9I5KNpjom/5NFtkmGseEH+AK/hny8XrytLH3+b5M8zL/Ycg3fhIocFpUMyl/wpFnVRvdw==",
       "path": "system.net.sockets/4.3.0",
       "hashPath": "system.net.sockets.4.3.0.nupkg.sha512"
-    },
-    "System.Reflection.TypeExtensions/4.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-dkmh/ySlwnXJp/1qYP9uyKkCK1CXR/REFzl7abHcArxBcV91mY2CgrrzSRA5Z/X4MevJWwXsklGRdR3A7K9zbg==",
-      "path": "system.reflection.typeextensions/4.4.0",
-      "hashPath": "system.reflection.typeextensions.4.4.0.nupkg.sha512"
     },
     "System.Security.Cryptography.ProtectedData/4.4.0": {
       "type": "package",
@@ -5202,6 +5248,13 @@
       "sha512": "sha512-5RXItQz5As4xN2/YUDxdpsEkMhvw3e6aNveFXUn4Hl/udNTCNhnKp8lT9fnc3MhvGKh1baak5CovpuQUXHAlIA==",
       "path": "system.reflection.primitives/4.3.0",
       "hashPath": "system.reflection.primitives.4.3.0.nupkg.sha512"
+    },
+    "System.Reflection.TypeExtensions/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7u6ulLcZbyxB5Gq0nMkQttcdBTx57ibzw+4IOXEfR+sXYQoHvjW5LTLyNr8O22UIMrqYbchJQJnos4eooYzYJA==",
+      "path": "system.reflection.typeextensions/4.3.0",
+      "hashPath": "system.reflection.typeextensions.4.3.0.nupkg.sha512"
     },
     "System.Resources.ResourceManager/4.3.0": {
       "type": "package",

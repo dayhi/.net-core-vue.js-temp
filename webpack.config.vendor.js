@@ -5,7 +5,7 @@ const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = (env) => {
     return [{
-        mode: 'production',
+        mode: 'production', //development   production
         stats: {
             modules: false
         },
@@ -22,18 +22,15 @@ module.exports = (env) => {
             jquery: 'jQuery',
             'vue': 'Vue',
             'vue-router': 'VueRouter',
-            'vuex':'Vuex',
-            'bootstrap.css':'bootstrap.css',
+            'bootstrap.css': 'bootstrap.css',
             'bootstrap': 'bootstrap',
         },
-        devtool:'cheap-module-source-map',
+        devtool: 'source-map',
         module: {
-            rules: [
-                {
-                    test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/,
-                    use: 'url-loader?limit=100000'
-                }
-            ]
+            rules: [{
+                test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/,
+                use: 'url-loader?limit=100000'
+            }]
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),

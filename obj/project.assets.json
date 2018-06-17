@@ -12430,8 +12430,10 @@
       "netcoreapp2.1": {
         "dependencies": {
           "Microsoft.AspNetCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.0, )"
+            "version": "[2.1.0, )",
+            "autoReferenced": true
           },
           "Microsoft.AspNetCore.ResponseCompression": {
             "target": "Package",

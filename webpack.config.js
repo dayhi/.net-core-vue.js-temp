@@ -23,12 +23,11 @@ module.exports = (env) => {
         entry: {
             'main': './ClientApp/boot.ts'
         },
-        devtool: 'cheap-module-source-map',
+        devtool: 'source-map', //调试source-map   生成cheap-module-source-map
         externals: {
             jquery: 'jQuery',
             'vue': 'Vue',
             'vue-router': 'VueRouter',
-            'vuex': 'Vuex',
             'bootstrap.css': 'bootstrap.css',
             'bootstrap': 'bootstrap',
         },
@@ -60,7 +59,7 @@ module.exports = (env) => {
         },
         output: {
             path: path.join(__dirname, bundleOutputDir),
-            filename: '[name].js',//[name].[chunkHash:8].js
+            filename: '[name].js',
             publicPath: 'dist/'
         },
         plugins: [
@@ -91,7 +90,7 @@ module.exports = (env) => {
                 new UglifyJsPlugin({
                     cache: true,
                     parallel: true,
-                    sourceMap: false
+                    sourceMap: true
                 }),
                 new OptimizeCSSAssetsPlugin({})
             ],
