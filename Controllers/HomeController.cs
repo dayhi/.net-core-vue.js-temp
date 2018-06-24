@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace vueTest.Controllers {
     public class HomeController : Controller {
         public IActionResult Index () {
+            
             return View ();
         }
 

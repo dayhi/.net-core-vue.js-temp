@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,9 +32,7 @@ namespace vueTest {
 
             services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
 
-            services.AddResponseCompression (options => {
-                options.EnableForHttps = true;
-            });
+            services.AddResponseCompression();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,12 +69,12 @@ namespace vueTest {
 
             app.UseMvc (routes => {
                 routes.MapRoute (
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute (
-                    name: "spa-fallback",
-                    defaults : new { controller = "Home", action = "Index" });
+                    name: "VueRoute",
+                    template: "{controller}/{*other}",
+                    defaults:new{
+                        controller="Home",
+                        action="Index"
+                    });
             });
         }
     }

@@ -5,7 +5,7 @@ const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 module.exports = (env) => {
     return [{
-        mode: 'production', //development   production
+        mode: 'development', //? development   production
         stats: {
             modules: false
         },
@@ -25,7 +25,7 @@ module.exports = (env) => {
             'bootstrap.css': 'bootstrap.css',
             'bootstrap': 'bootstrap',
         },
-        devtool: 'source-map',
+        devtool: 'cheap-module-source-map', //? cheap-module-source-map   source-map
         module: {
             rules: [{
                 test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/,
@@ -44,7 +44,7 @@ module.exports = (env) => {
                 jQuery: 'jquery'
             }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify('production'),
+                'process.env.NODE_ENV': JSON.stringify('development'),
             }),
             new webpack.DllPlugin({
                 path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),

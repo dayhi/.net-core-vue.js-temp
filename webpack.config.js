@@ -12,7 +12,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = (env) => {
 
     return [{
-        mode: 'production',
+        mode: 'development',
         stats: {
             modules: false
         },
@@ -21,9 +21,10 @@ module.exports = (env) => {
             extensions: ['.js', '.ts'],
         },
         entry: {
-            'main': './ClientApp/boot.ts'
+            'main': './ClientApp/Home/boot.ts',
+            'admin': './ClientApp/Admin/boot.ts',
         },
-        devtool: 'source-map', //调试source-map   生成cheap-module-source-map
+        devtool: 'cheap-module-source-map', //调试source-map   生成cheap-module-source-map
         externals: {
             jquery: 'jQuery',
             'vue': 'Vue',
@@ -67,7 +68,7 @@ module.exports = (env) => {
             new CheckerPlugin(),
             new webpack.DefinePlugin({
                 'process.env': {
-                    'process.env.NODE_ENV': JSON.stringify('production'),
+                    'process.env.NODE_ENV': JSON.stringify('development'),
                 }
             }),
             new webpack.ProvidePlugin({

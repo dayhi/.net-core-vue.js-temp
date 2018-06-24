@@ -1,0 +1,16 @@
+<template>
+    <div class="row">
+        <div class="offset-4 col-4">
+            登陆：
+            <input type="text" v-model="userData.userName_input">
+            <br> 密码：
+            <input type="password" v-model="userData.userPwd_input">
+            <br>
+            <div>{{ errorMsg }}</div>
+            <br>
+            <input type="button" class="btn" v-bind:disable="disBtn" v-on:click="sendLogin" value="登陆">
+        </div>
+    </div>
+</template>
+
+<script src="./home.ts"></script>
