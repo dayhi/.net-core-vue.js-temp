@@ -25,7 +25,7 @@ module.exports = (env) => {
             'bootstrap.css': 'bootstrap.css',
             'bootstrap': 'bootstrap',
         },
-        devtool: 'cheap-module-source-map', //? cheap-module-source-map   source-map
+        devtool: 'source-map', //? cheap-module-source-map   source-map
         module: {
             rules: [{
                 test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/,

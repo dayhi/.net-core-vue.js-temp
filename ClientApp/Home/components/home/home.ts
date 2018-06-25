@@ -15,32 +15,29 @@ export default class HomeComponent extends Vue {
 
     sendLogin() {
 
+        if (this.disBtn) return;
+
         this.disBtn = true;
 
-        fetch("api/Login/LoginUser", {
-            method: "POST",
-            body: JSON.stringify(this.userData),
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            })
-        })
-            .then(res => res.json() as Promise<AjaxMsg>)
-            .then(ajaxmsg => {
-
+        $.ajax({
+            url: './api/Login/LoginUser',
+            data: JSON.stringify(this.userData),
+            type:'POST',
+            contentType:'application/json',
+            success: data=> {
                 this.disBtn = false;
-
-                if (!ajaxmsg.type) {
-                    this.errorMsg = ajaxmsg.msg;
+                if (!data.type) {
+                    this.errorMsg = data.msg;
                     return;
                 }
 
-                this.errorMsg = "成功登陆！！";
-            })
-            .catch(error => {
+                this.errorMsg = '成功登陆！！';
+            },
+            error: ()=> {
                 this.errorMsg = "失去连接!!"
                 this.disBtn = false;
-            })
-
+            }
+        })
     }
 
 }

@@ -24,7 +24,7 @@ module.exports = (env) => {
             'main': './ClientApp/Home/boot.ts',
             'admin': './ClientApp/Admin/boot.ts',
         },
-        devtool: 'cheap-module-source-map', //调试source-map   生成cheap-module-source-map
+        devtool: 'source-map', //调试source-map   生成cheap-module-source-map
         externals: {
             jquery: 'jQuery',
             'vue': 'Vue',

@@ -1,1 +1,0 @@
-{"name":"vendor_f03e9abe1032e677f8b2","content":{"./node_modules/whatwg-fetch/fetch.js":{"id":0,"buildMeta":{"providedExports":true}},"./node_modules/isomorphic-fetch/fetch-npm-browserify.js":{"id":1,"buildMeta":{"providedExports":true}},"./node_modules/event-source-polyfill/src/eventsource.js":{"id":2,"buildMeta":{"providedExports":true}}}}

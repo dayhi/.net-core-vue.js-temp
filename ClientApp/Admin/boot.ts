@@ -5,8 +5,8 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
-    { path: "/Admin/", component: require('./index/index.vue.html').default },
-    { path: "/Admin/user", component: require('./index/index.vue.html').default }
+    { path: "/admin/", component: require('./index/index.vue.html').default },
+    { path: "/admin/user", component: require('./index/index.vue.html').default }
 ];
 
 new Vue({
